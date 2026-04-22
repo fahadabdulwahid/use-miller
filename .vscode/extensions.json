@@ -1,8 +1,7 @@
 {
     "recommendations": [
-        "DavidAnson.vscode-markdownlint",
-        "dbaeumer.vscode-eslint",
+        "myml.vscode-markdown-plantuml-preview",
         "esbenp.prettier-vscode",
-        "streetsidesoftware.code-spell-checker"
+        "jebbs.plantuml"
     ]
 }
