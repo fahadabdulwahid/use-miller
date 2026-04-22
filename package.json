@@ -1,77 +1,77 @@
 {
-    "name": "use-miller",
-    "version": "1.0.1",
-    "description": "Dev tooling",
-    "private": true,
-    "type": "module",
-    "license": "UNLICENSED",
-    "packageManager": "pnpm@10.27.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/darraghoriordan/use-miller.git"
-    },
-    "author": "Use Miller",
-    "engines": {
-        "node": "24.x"
-    },
-    "scripts": {
-        "clean": "rm -Rf ./dist/",
-        "build": "pnpm run -r --parallel --filter=!*{backend-e2e,frontend}* build",
-        "test": "pnpm run -r --parallel test",
-        "lint": "pnpm run -r --parallel lint",
-        "mill:dev": "cd apps/backend && npm run up -d && cd ../.. && concurrently \"cd apps/frontend && npm run start\" \"cd apps/backend && npm run start\"",
-        "start:be:prod": "cd apps/backend && npm run start:prod",
-        "prettier": "prettier --write src/*",
-        "husky:init": "husky install && chmod ug+x .husky/*",
-        "mill:init": "pnpm install -r && pnpm run husky:init && pnpm run --filter \"*project-setup\" build && node --experimental-modules libs/project-setup/dist/miller-setup.js",
-        "release": "npx semantic-release",
-        "semantic-release": "semantic-release",
-        "knip": "knip",
-        "pb": "git push dokku main",
-        "pf": "git push dokkufe main",
-        "code-repo:init": "node ./libs/project-deploy/init-code-repos.cjs",
-        "docker:be": "docker build . --ssh usemiller=$HOME/.ssh/useMiller --ssh macsetup=$HOME/.ssh/macSetupScript --ssh nestbackend=$HOME/.ssh/nestBackendLibs -f ./Dockerfile-be -t use-miller/backend-api:latest -t dokku/use-miller:v1.0.0",
-        "md:be": "docker save dokku/use-miller:v1.0.0 | ssh dokku-as-darragh \"docker load\" && ssh dokku-as-darragh \"dokku tags:set use-miller v1.0.0\"",
-        "docker:fe": "docker build . -f ./Dockerfile-fe -t use-miller/frontend:latest -t dokku/use-miller-frontend:v1.0.0",
-        "md:fe": "docker save dokku/use-miller:v1.0.0 | ssh dokku-as-darragh \"docker load\""
-    },
-    "dependencies": {
-        "@commitlint/cli": "20.5.0",
-        "@commitlint/config-conventional": "20.5.0",
-        "@commitlint/format": "20.5.0",
-        "@semantic-release/exec": "7.1.0",
-        "@types/node": "25.6.0",
-        "@typescript-eslint/eslint-plugin": "8.59.0",
-        "@typescript-eslint/parser": "8.59.0",
-        "concurrently": "9.2.1",
-        "conventional-changelog-conventionalcommits": "9.3.1",
-        "dotenv": "17.4.2",
-        "eslint": "9.39.2",
-        "eslint-config-prettier": "10.1.8",
-        "husky": "9.1.7",
-        "knip": "6.6.0",
-        "lerna": "9.0.7",
-        "lint-staged": "16.4.0",
-        "nx": "22.6.5",
-        "prettier": "3.8.3",
-        "rimraf": "6.1.3",
-        "semantic-release": "25.0.3",
-        "ts-node": "10.9.2",
-        "typescript": "5.9.3"
-    },
-    "release": {
-        "branches": [
-            "main"
-        ],
-        "plugins": [
-            "@semantic-release/commit-analyzer",
-            "@semantic-release/release-notes-generator",
-            [
-                "@semantic-release/github",
-                {
-                    "assets": []
-                }
-            ]
-        ]
-    }
+  "name": "use-miller",
+  "version": "1.0.1",
+  "description": "Dev tooling",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.27.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darraghoriordan/use-miller.git"
+  },
+  "author": "Use Miller",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "clean": "rm -Rf ./dist/",
+    "build": "node api.js && pnpm run -r --parallel --filter=!*{backend-e2e,frontend}* build",
+    "test": "pnpm run -r --parallel test",
+    "lint": "pnpm run -r --parallel lint",
+    "mill:dev": "cd apps/backend && npm run up -d && cd ../.. && concurrently \"cd apps/frontend && npm run start\" \"cd apps/backend && npm run start\"",
+    "start:be:prod": "cd apps/backend && npm run start:prod",
+    "prettier": "prettier --write src/*",
+    "husky:init": "husky install && chmod ug+x .husky/*",
+    "mill:init": "pnpm install -r && pnpm run husky:init && pnpm run --filter \"*project-setup\" build && node --experimental-modules libs/project-setup/dist/miller-setup.js",
+    "release": "npx semantic-release",
+    "semantic-release": "semantic-release",
+    "knip": "knip",
+    "pb": "git push dokku main",
+    "pf": "git push dokkufe main",
+    "code-repo:init": "node ./libs/project-deploy/init-code-repos.cjs",
+    "docker:be": "docker build . --ssh usemiller=$HOME/.ssh/useMiller --ssh macsetup=$HOME/.ssh/macSetupScript --ssh nestbackend=$HOME/.ssh/nestBackendLibs -f ./Dockerfile-be -t use-miller/backend-api:latest -t dokku/use-miller:v1.0.0",
+    "md:be": "docker save dokku/use-miller:v1.0.0 | ssh dokku-as-darragh \"docker load\" && ssh dokku-as-darragh \"dokku tags:set use-miller v1.0.0\"",
+    "docker:fe": "docker build . -f ./Dockerfile-fe -t use-miller/frontend:latest -t dokku/use-miller-frontend:v1.0.0",
+    "md:fe": "docker save dokku/use-miller:v1.0.0 | ssh dokku-as-darragh \"docker load\""
+  },
+  "dependencies": {
+    "@commitlint/cli": "20.5.0",
+    "@commitlint/config-conventional": "20.5.0",
+    "@commitlint/format": "20.5.0",
+    "@semantic-release/exec": "7.1.0",
+    "@types/node": "25.6.0",
+    "@typescript-eslint/eslint-plugin": "8.59.0",
+    "@typescript-eslint/parser": "8.59.0",
+    "concurrently": "9.2.1",
+    "conventional-changelog-conventionalcommits": "9.3.1",
+    "dotenv": "17.4.2",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "husky": "9.1.7",
+    "knip": "6.6.0",
+    "lerna": "9.0.7",
+    "lint-staged": "16.4.0",
+    "nx": "22.6.5",
+    "prettier": "3.8.3",
+    "rimraf": "6.1.3",
+    "semantic-release": "25.0.3",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/github",
+        {
+          "assets": []
+        }
+      ]
+    ]
+  }
 }
